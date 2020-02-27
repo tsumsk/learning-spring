@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import tacos.Ingredient.Type;
 
@@ -36,9 +37,16 @@ public class DesignTacoController {
             model.addAttribute(type.toString().toLowerCase(),
                 filterByType(ingredients, type));
         }
-        model.addAttribute("design", new Taco());
+        model.addAttribute("taco", new Taco());
 
         return "design";
+    }
+
+    @PostMapping
+    public String processDesign(Taco taco) {
+        log.info("Processing design: " + taco);
+
+        return "redirect:/orders/current";
     }
 
     private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
