@@ -1,16 +1,19 @@
-package tacos.repository.data;
-
-import java.util.Date;
-import java.util.List;
-
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+package tacos.jpa.data;
 
 import lombok.Data;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Date;
+import java.util.List;
+
 @Data
+@Entity
 public class Taco {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
@@ -18,7 +21,13 @@ public class Taco {
     private String name;
 
     @NotEmpty(message = "You must choose at least 1 ingredient")
+    @ManyToMany(targetEntity = Ingredient.class)
     private List<String> ingredients;
 
     private Date createdAt;
+
+    @PrePersist
+    private void createdAt() {
+        this.createdAt = new Date();
+    }
 }

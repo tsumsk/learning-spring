@@ -1,4 +1,4 @@
-package tacos.repository.jdbc;
+package tacos.jdbc.repository;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -9,9 +9,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
-import tacos.repository.data.Order;
-import tacos.repository.data.Taco;
-import tacos.repository.OrderRepository;
+import tacos.jdbc.data.Order;
+import tacos.jdbc.data.Taco;
 
 @Repository
 public class JdbcOrderRepository implements OrderRepository {

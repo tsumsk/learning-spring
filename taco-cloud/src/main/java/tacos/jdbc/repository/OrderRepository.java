@@ -1,6 +1,6 @@
-package tacos.repository;
+package tacos.jdbc.repository;
 
-import tacos.repository.data.Order;
+import tacos.jdbc.data.Order;
 
 public interface OrderRepository {
     Order save(Order order);

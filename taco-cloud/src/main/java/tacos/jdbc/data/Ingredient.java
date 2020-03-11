@@ -1,4 +1,4 @@
-package tacos.repository.data;
+package tacos.jdbc.data;
 
 import lombok.Data;
 

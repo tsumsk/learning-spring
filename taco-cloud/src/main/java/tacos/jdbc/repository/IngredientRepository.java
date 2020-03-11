@@ -1,6 +1,6 @@
-package tacos.repository;
+package tacos.jdbc.repository;
 
-import tacos.repository.data.Ingredient;
+import tacos.jdbc.data.Ingredient;
 
 public interface IngredientRepository {
     Iterable<Ingredient> findAll();

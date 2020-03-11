@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import tacos.repository.data.Order;
-import tacos.repository.OrderRepository;
+import tacos.jdbc.data.Order;
+import tacos.jdbc.repository.OrderRepository;
 
 @Slf4j
 @Controller

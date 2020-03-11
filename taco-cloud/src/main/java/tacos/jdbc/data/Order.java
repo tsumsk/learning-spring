@@ -1,4 +1,4 @@
-package tacos.repository.data;
+package tacos.jdbc.data;
 
 import java.util.ArrayList;
 import java.util.Date;

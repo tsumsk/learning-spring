@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import tacos.repository.IngredientRepository;
-import tacos.repository.TacoRepository;
-import tacos.repository.data.Ingredient;
-import tacos.repository.data.Ingredient.Type;
-import tacos.repository.data.Order;
-import tacos.repository.data.Taco;
+import tacos.jdbc.repository.IngredientRepository;
+import tacos.jdbc.repository.TacoRepository;
+import tacos.jdbc.data.Ingredient;
+import tacos.jdbc.data.Ingredient.Type;
+import tacos.jdbc.data.Order;
+import tacos.jdbc.data.Taco;
 
 @Slf4j
 @Controller
