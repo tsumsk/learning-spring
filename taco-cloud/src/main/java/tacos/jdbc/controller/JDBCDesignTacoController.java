@@ -1,4 +1,4 @@
-package tacos.controller;
+package tacos.jdbc.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,16 +25,16 @@ import tacos.jdbc.data.Taco;
 
 @Slf4j
 @Controller
-@RequestMapping("/design")
+@RequestMapping("/jdbc/design")
 @SessionAttributes("order")
-public class DesignTacoController {
+public class JDBCDesignTacoController {
 
     private final IngredientRepository ingredientRepository;
 
     private TacoRepository tacoRepository;
 
     @Autowired
-    public DesignTacoController(IngredientRepository ingredientRepository, TacoRepository tacoRepository) {
+    public JDBCDesignTacoController(IngredientRepository ingredientRepository, TacoRepository tacoRepository) {
         this.ingredientRepository = ingredientRepository;
         this.tacoRepository = tacoRepository;
     }
@@ -91,7 +91,7 @@ public class DesignTacoController {
         Taco saved = tacoRepository.save(taco);
         order.addTaco(saved);
 
-        return "redirect:/orders/current";
+        return "redirect:/jdbc/orders/current";
     }
 
     private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {

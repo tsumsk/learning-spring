@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
@@ -30,6 +31,7 @@ public class JdbcOrderRepository implements OrderRepository {
             .withTableName("Taco_Order_Tacos");
 
         this.objectMapper = new ObjectMapper();
+        this.objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
     }
 
     @Override
@@ -42,7 +44,7 @@ public class JdbcOrderRepository implements OrderRepository {
 
     private long saveOrderInfo(Order order) {
         Map<String, Object> values = objectMapper.convertValue(order, Map.class);
-        values.put("createdAt", order.getCreatedAt());
+        values.put("created_at", order.getCreatedAt());
 
         long orderId = orderInserter.executeAndReturnKey(values).longValue();
 
@@ -51,10 +53,10 @@ public class JdbcOrderRepository implements OrderRepository {
 
     private void saveOrderTacos(List<Taco> tacos, long orderId) {
         Map<String, Object> values = new HashMap<>();
-        values.put("tacoOrderId", orderId);
+        values.put("taco_order_id", orderId);
 
         for (Taco taco : tacos) {
-            values.put("tacoId", taco.getId());
+            values.put("taco_id", taco.getId());
             orderTacosInserter.execute(values);
         }
     }

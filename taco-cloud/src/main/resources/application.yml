@@ -1,10 +1,15 @@
 spring:
+  jpa:
+    show-sql: true
   datasource:
     url: jdbc:mysql://localhost/spring_in_action
     username: liuxu
     password: liuxu
-    #initialization-mode: always
+    initialization-mode: always
     schema:
       - classpath:schema.sql
-    #data:
-    #  - classpath:data.sql
+    data:
+      - classpath:data.sql
+
+hibernate:
+  physical_naming_strategy: tacos.jpa.data.SnakeCasePhysicalNamingStrategy

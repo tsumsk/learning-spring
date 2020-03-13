@@ -1,4 +1,4 @@
-package tacos.controller;
+package tacos.jpa.controller;
 
 import javax.validation.Valid;
 
@@ -12,32 +12,32 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import tacos.jdbc.data.Order;
-import tacos.jdbc.repository.OrderRepository;
+import tacos.jpa.data.Order;
+import tacos.jpa.repository.OrderRepository;
 
 @Slf4j
 @Controller
-@RequestMapping("/orders")
+@RequestMapping("/jpa/orders")
 @SessionAttributes("order")
-public class OrderController {
+public class JPAOrderController {
 
     private OrderRepository orderRepository;
 
     @Autowired
-    public OrderController(OrderRepository orderRepository) {
+    public JPAOrderController(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
 
     @GetMapping("/current")
     public String orderForm(Model model) {
         // model.addAttribute("order", new Order());
-        return "orderForm";
+        return "jpaOrderForm";
     }
 
     @PostMapping
     public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus) {
         if (errors.hasErrors()) {
-            return "orderForm";
+            return "jpaOrderForm";
         }
 
         log.info("Order submitted: " + order);

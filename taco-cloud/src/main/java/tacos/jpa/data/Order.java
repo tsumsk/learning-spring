@@ -16,7 +16,7 @@ import java.util.List;
 @Table(name = "Taco_Order")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Name is required")
@@ -41,11 +41,15 @@ public class Order {
     private String ccExpiration;
 
     @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
+    @Column(name = "cc_cvv")
     private String ccCVV;
 
     private Date createdAt;
 
     @ManyToMany(targetEntity = Taco.class)
+    @JoinTable(name = "Taco_Order_Tacos",
+        joinColumns = @JoinColumn(name = "taco_order_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "taco_id", referencedColumnName = "id"))
     private List<Taco> tacos = new ArrayList<>();
 
     public void addTaco(Taco taco) {
