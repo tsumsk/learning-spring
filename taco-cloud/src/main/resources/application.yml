@@ -9,7 +9,7 @@ spring:
     schema:
       - classpath:schema.sql
     data:
-      - classpath:data.sql
+#      - classpath:data.sql
 
 hibernate:
   physical_naming_strategy: tacos.jpa.data.SnakeCasePhysicalNamingStrategy
