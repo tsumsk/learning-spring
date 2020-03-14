@@ -36,11 +36,16 @@ create table if not exists Taco_Order_Tacos (
     taco_id bigint not null
 );
 
-create table if not exists Taco_Users (
+create table if not exists Taco_User (
     id bigint auto_increment,
     username varchar(50) not null,
     password varchar(256) not null,
     enabled smallint not null,
+    street varchar(50) not null default '',
+    city varchar(50) not null default '',
+    state varchar(2) not null default '',
+    zip varchar(10) not null default '',
+    phone varchar(11) not null default '',
     primary key (id)
 );
 
