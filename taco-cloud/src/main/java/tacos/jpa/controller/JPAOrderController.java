@@ -1,5 +1,7 @@
 package tacos.jpa.controller;
 
+import java.security.Principal;
+
 import javax.validation.Valid;
 
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import tacos.jpa.data.Order;
 import tacos.jpa.repository.OrderRepository;
+import tacos.security.repository.UserRepository;
 
 @Slf4j
 @Controller
@@ -22,6 +25,9 @@ import tacos.jpa.repository.OrderRepository;
 public class JPAOrderController {
 
     private OrderRepository orderRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     public JPAOrderController(OrderRepository orderRepository) {
@@ -35,12 +41,15 @@ public class JPAOrderController {
     }
 
     @PostMapping
-    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus) {
+    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus, Principal principal) {
         if (errors.hasErrors()) {
             return "jpaOrderForm";
         }
 
         log.info("Order submitted: " + order);
+
+        order.setUser(userRepository.findByUsername(principal.getName()));
+
         orderRepository.save(order);
 
         // close session

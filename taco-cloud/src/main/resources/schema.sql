@@ -49,6 +49,11 @@ create table if not exists Taco_User (
     primary key (id)
 );
 
+create table if not exists Taco_User_Orders (
+    taco_user_id bigint not null,
+    taco_order_id bigint not null
+);
+
 create table if not exists Taco_User_Authorities (
     id bigint auto_increment,
     username varchar(50) not null,

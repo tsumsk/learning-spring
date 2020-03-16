@@ -2,6 +2,7 @@ package tacos.jpa.data;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
+import tacos.security.data.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
@@ -51,6 +52,12 @@ public class Order {
         joinColumns = @JoinColumn(name = "taco_order_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "taco_id", referencedColumnName = "id"))
     private List<Taco> tacos = new ArrayList<>();
+
+    @ManyToOne(targetEntity = User.class)
+    @JoinTable(name = "Taco_User_Orders",
+        joinColumns = @JoinColumn(name = "taco_order_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "taco_user_id", referencedColumnName = "id"))
+    private User user;
 
     public void addTaco(Taco taco) {
         tacos.add(taco);
