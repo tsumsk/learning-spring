@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -62,6 +63,7 @@ public class JPAOrderController {
     }
      */
 
+    /*
     @PostMapping
     public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus,
         Authentication authentication) {
@@ -73,6 +75,27 @@ public class JPAOrderController {
         log.info("Order submitted: " + order);
 
         order.setUser((User)authentication.getPrincipal());
+
+        orderRepository.save(order);
+
+        // close session
+        sessionStatus.setComplete();
+
+        return "redirect:/";
+    }
+     */
+
+    @PostMapping
+    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus,
+        @AuthenticationPrincipal User user) {
+
+        if (errors.hasErrors()) {
+            return "jpaOrderForm";
+        }
+
+        log.info("Order submitted: " + order);
+
+        order.setUser(user);
 
         orderRepository.save(order);
 
