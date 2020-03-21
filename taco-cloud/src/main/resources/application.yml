@@ -13,3 +13,10 @@ spring:
 
 hibernate:
   physical_naming_strategy: tacos.jpa.data.SnakeCasePhysicalNamingStrategy
+
+server:
+  port: 8443
+  ssl:
+    key-store: classpath:tacocloud.jks
+    key-store-password: tacocloud
+    key-password: tacocloud
