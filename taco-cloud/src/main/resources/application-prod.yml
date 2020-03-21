@@ -1,3 +1,4 @@
+# you may need to "export SPRING_PROFILES_ACTIVE=prod"
 spring:
   jpa:
     show-sql: true
@@ -23,7 +24,7 @@ server:
 
 logging:
   level:
-    tacos: DEBUG
+    tacos: WARN
 
 taco:
   orders:
