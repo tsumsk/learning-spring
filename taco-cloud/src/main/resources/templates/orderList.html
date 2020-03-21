@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Taco Cloud</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+    <h1>You has ordered:</h1>
+    <img th:src="@{/images/TacoCloud.jpeg}" />
+
+    <div>
+        <div th:each="order : ${orders}">
+            <span th:text="${order}">ORDER</span><br />
+        </div>
+    </div>
+</body>
+</html>

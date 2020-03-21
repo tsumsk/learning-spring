@@ -20,3 +20,7 @@ server:
     key-store: classpath:tacocloud.jks
     key-store-password: tacocloud
     key-password: tacocloud
+
+taco:
+  orders:
+    pageSize: 5
