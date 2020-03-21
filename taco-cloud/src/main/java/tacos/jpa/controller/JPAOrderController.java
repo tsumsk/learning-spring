@@ -86,6 +86,7 @@ public class JPAOrderController {
     }
      */
 
+    /*
     @PostMapping
     public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus) {
 
@@ -105,8 +106,8 @@ public class JPAOrderController {
 
         return "redirect:/";
     }
+     */
 
-    /*
     @PostMapping
     public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus,
         @AuthenticationPrincipal User user) {
@@ -126,5 +127,4 @@ public class JPAOrderController {
 
         return "redirect:/";
     }
-     */
 }
