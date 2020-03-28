@@ -1,0 +1,31 @@
+# you may need to "export SPRING_PROFILES_ACTIVE=prod"
+spring:
+  jpa:
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost/spring_in_action
+    username: liuxu
+    password: liuxu
+    initialization-mode: always
+    schema:
+      - classpath:schema.sql
+    data:
+#      - classpath:data.sql
+
+hibernate:
+  physical_naming_strategy: tacos.config.SnakeCasePhysicalNamingStrategy
+
+server:
+  port: 8443
+  ssl:
+    key-store: classpath:tacocloud.jks
+    key-store-password: tacocloud
+    key-password: tacocloud
+
+logging:
+  level:
+    tacos: WARN
+
+taco:
+  orders:
+    pageSize: 5
