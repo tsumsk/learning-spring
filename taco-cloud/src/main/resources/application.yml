@@ -1,4 +1,9 @@
 spring:
+  artemis:
+    host: localhost
+    port: 8161
+    user: liuxu
+    password: liuxu
   jpa:
     show-sql: true
   datasource:

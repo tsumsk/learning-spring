@@ -1,17 +1,12 @@
 package tacos.jpa.controller;
 
-import java.security.Principal;
-
 import javax.validation.Valid;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -23,6 +18,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import tacos.config.TacoOrderConfig;
 import tacos.jpa.data.Order;
 import tacos.jpa.repository.OrderRepository;
+import tacos.message.jms.OrderMessagingService;
 import tacos.security.data.User;
 import tacos.security.repository.UserRepository;
 
@@ -39,6 +35,9 @@ public class JPAOrderController {
 
     @Autowired
     private TacoOrderConfig tacoOrderConfig;
+
+    @Autowired
+    private OrderMessagingService orderMessagingService;
 
     @Autowired
     public JPAOrderController(OrderRepository orderRepository) {
@@ -128,6 +127,8 @@ public class JPAOrderController {
         order.setUser(user);
 
         orderRepository.save(order);
+
+        // orderMessagingService.sendOrder(order);
 
         // close session
         sessionStatus.setComplete();
