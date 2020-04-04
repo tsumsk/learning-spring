@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/spring_guides
+    username: liuxu
+    password: liuxu
+    initialization-mode: always
+    schema:
+      - classpath:schema.sql
