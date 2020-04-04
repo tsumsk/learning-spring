@@ -1,4 +1,4 @@
-package tacos.message.jms;
+package tacos.message;
 
 import tacos.jpa.data.Order;
 

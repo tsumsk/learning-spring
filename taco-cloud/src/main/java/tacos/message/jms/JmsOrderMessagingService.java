@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import tacos.jpa.data.Order;
+import tacos.message.OrderMessagingService;
 
 @Service
 public class JmsOrderMessagingService implements OrderMessagingService {

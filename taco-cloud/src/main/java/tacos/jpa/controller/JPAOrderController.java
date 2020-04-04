@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import tacos.config.TacoOrderConfig;
 import tacos.jpa.data.Order;
 import tacos.jpa.repository.OrderRepository;
-import tacos.message.jms.OrderMessagingService;
+import tacos.message.OrderMessagingService;
 import tacos.security.data.User;
 import tacos.security.repository.UserRepository;
 
@@ -37,7 +38,12 @@ public class JPAOrderController {
     private TacoOrderConfig tacoOrderConfig;
 
     @Autowired
-    private OrderMessagingService orderMessagingService;
+    @Qualifier("jmsOrderMessagingService")
+    private OrderMessagingService jmsOrderMessagingService;
+
+    @Autowired
+    @Qualifier("rabbitmqOrderMessagingService")
+    private OrderMessagingService rabbitmqOrderMessagingService;
 
     @Autowired
     public JPAOrderController(OrderRepository orderRepository) {
@@ -128,7 +134,9 @@ public class JPAOrderController {
 
         orderRepository.save(order);
 
-        // orderMessagingService.sendOrder(order);
+        // jmsOrderMessagingService.sendOrder(order);
+
+        rabbitmqOrderMessagingService.sendOrder(order);
 
         // close session
         sessionStatus.setComplete();

@@ -12,7 +12,7 @@ import tacos.jpa.data.Order;
 public class JmsConfig {
 
     @Bean
-    public MappingJackson2MessageConverter messageConverter() {
+    public MappingJackson2MessageConverter jmsMessageConverter() {
         MappingJackson2MessageConverter messageConverter = new MappingJackson2MessageConverter();
 
         // enables the receiver to know what type to convert an incoming message to
