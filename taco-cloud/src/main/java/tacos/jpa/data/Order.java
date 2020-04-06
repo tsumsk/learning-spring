@@ -1,16 +1,28 @@
 package tacos.jpa.data;
 
-import lombok.Data;
-import org.hibernate.validator.constraints.CreditCardNumber;
-import tacos.security.data.User;
-
-import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import org.hibernate.validator.constraints.CreditCardNumber;
+import tacos.security.data.User;
 
 @Data
 @Entity
@@ -57,6 +69,7 @@ public class Order {
     @JoinTable(name = "Taco_User_Orders",
         joinColumns = @JoinColumn(name = "taco_order_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "taco_user_id", referencedColumnName = "id"))
+    @JsonIgnore
     private User user;
 
     public void addTaco(Taco taco) {
