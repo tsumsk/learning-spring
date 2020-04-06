@@ -1,4 +1,8 @@
 spring:
+  kafka:
+    consumer:
+      group-id: test
+      auto-offset-reset: earliest
   artemis:
     host: localhost
     port: 8161

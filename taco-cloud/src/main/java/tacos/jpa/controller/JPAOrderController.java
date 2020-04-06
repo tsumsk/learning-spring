@@ -46,6 +46,10 @@ public class JPAOrderController {
     private OrderMessagingService rabbitmqOrderMessagingService;
 
     @Autowired
+    @Qualifier("kafkaOrderMessagingService")
+    private OrderMessagingService kafkaOrderMessagingService;
+
+    @Autowired
     public JPAOrderController(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
@@ -137,6 +141,8 @@ public class JPAOrderController {
         // jmsOrderMessagingService.sendOrder(order);
 
         rabbitmqOrderMessagingService.sendOrder(order);
+
+        // kafkaOrderMessagingService.sendOrder(order);
 
         // close session
         sessionStatus.setComplete();
