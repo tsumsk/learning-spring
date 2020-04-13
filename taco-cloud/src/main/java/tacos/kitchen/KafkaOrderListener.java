@@ -1,7 +1,6 @@
 package tacos.kitchen;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 import tacos.jpa.data.Order;
 
@@ -9,7 +8,7 @@ import tacos.jpa.data.Order;
 @Component
 public class KafkaOrderListener {
 
-    @KafkaListener(topics = "tacocloud.order")
+    //@KafkaListener(topics = "tacocloud.order")
     public void receiveOrder(Order order) {
         log.info("order: " + order);
     }
