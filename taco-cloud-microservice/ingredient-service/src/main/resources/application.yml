@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: ingredient-service
+  data:
+    rest:
+      base-path: /api
+  jpa:
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost/spring_in_action
+    username: liuxu
+    password: liuxu
+    initialization-mode: always
+    schema:
+      - classpath:schema.sql
+    data:
+#      - classpath:data.sql
+
+server:
+  port: 0
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
