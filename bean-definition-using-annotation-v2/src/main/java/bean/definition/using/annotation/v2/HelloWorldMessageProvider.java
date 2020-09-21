@@ -2,7 +2,7 @@ package bean.definition.using.annotation.v2;
 
 import org.springframework.stereotype.Component;
 
-@Component("provider")
+@Component("provider1")
 public class HelloWorldMessageProvider implements MessageProvider {
     @Override
     public String getMessage() {

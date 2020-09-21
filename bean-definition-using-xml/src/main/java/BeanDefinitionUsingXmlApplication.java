@@ -7,5 +7,8 @@ public class BeanDefinitionUsingXmlApplication {
 
 	    MessageRenderer mr = ctx.getBean("renderer", MessageRenderer.class);
 	    mr.render();
+
+		ConstructorConfusion cc = ctx.getBean("constructorConfusion", ConstructorConfusion.class);
+		System.out.println(cc);
 	}
 }

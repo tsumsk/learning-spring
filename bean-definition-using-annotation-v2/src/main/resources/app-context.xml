@@ -8,4 +8,9 @@
 
     <context:component-scan
             base-package="bean.definition.using.annotation.v2"/>
+
+    <bean id="message" class="java.lang.String">
+        <constructor-arg value="I hope that someone gets my message in a bottle" />
+    </bean>
+
 </beans>

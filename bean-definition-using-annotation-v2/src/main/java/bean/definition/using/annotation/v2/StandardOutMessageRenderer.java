@@ -3,6 +3,8 @@ package bean.definition.using.annotation.v2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 @Service("renderer")
 public class StandardOutMessageRenderer implements MessageRenderer {
 
@@ -17,7 +19,7 @@ public class StandardOutMessageRenderer implements MessageRenderer {
     }
 
     @Override
-    @Autowired
+    @Resource(name = "provider2")
     public void setMessageProvider(MessageProvider messageProvider) {
         this.messageProvider = messageProvider;
     }
