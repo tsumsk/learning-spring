@@ -1,0 +1,18 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="injectSimpleConfig" class="InjectSimpleConfig" />
+
+    <bean id="injectSimple" class="InjectSimple">
+        <property name="name" value="#{injectSimpleConfig.name}" />
+        <property name="age" value="#{injectSimpleConfig.age + 1}" />
+        <property name="height" value="#{injectSimpleConfig.height}" />
+        <property name="programmer" value="#{injectSimpleConfig.programmer}" />
+        <property name="ageInSeconds" value="#{injectSimpleConfig.ageInSeconds}" />
+    </bean>
+
+</beans>

@@ -1,0 +1,16 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="injectSimple" class="InjectSimple">
+        <property name="name" value="John Mayer" />
+        <property name="age" value="39" />
+        <property name="height" value="1.92" />
+        <property name="programmer" value="false" />
+        <property name="ageInSeconds" value="1241401112" />
+    </bean>
+
+</beans>
