@@ -1,0 +1,23 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="song1" class="Song">
+        <property name="title" ref="parentTitle" />
+    </bean>
+    
+    <bean id="song2" class="Song">
+        <property name="title" ref="childTitle" />
+    </bean>
+
+    <bean id="song3" class="Song">
+        <property name="title">
+            <ref parent="childTitle" />
+        </property>
+    </bean>
+
+    <bean id="childTitle" class="java.lang.String">
+        <constructor-arg value="No such thing" />
+    </bean>
+</beans>
