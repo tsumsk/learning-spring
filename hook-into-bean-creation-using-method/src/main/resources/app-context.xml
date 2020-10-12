@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-lazy-init="true">
+
+    <bean id="singerOne" class="Singer" init-method="init">
+        <property name="name" value="John Mayer"/>
+        <property name="age" value="39" />
+    </bean>
+
+    <bean id="singerTwo" class="Singer" init-method="init">
+        <property name="age" value="72" />
+    </bean>
+
+    <bean id="singerThree" class="Singer" init-method="init">
+        <property name="name" value="John Mayer"/>
+    </bean>
+</beans>
