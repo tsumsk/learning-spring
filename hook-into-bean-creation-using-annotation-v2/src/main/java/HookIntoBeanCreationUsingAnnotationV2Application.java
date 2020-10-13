@@ -1,12 +1,11 @@
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.GenericApplicationContext;
 
-public class HookIntoBeanCreationUsingAnnotationApplication {
+public class HookIntoBeanCreationUsingAnnotationV2Application {
     public static void main(String[] args) {
-        GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
-        ctx.load("app-context.xml");
-        ctx.refresh();
+        GenericApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
 
         getBean("singerOne", ctx);
         getBean("singerTwo", ctx);
