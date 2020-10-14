@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <util:list id="propertyEditorRegistrarsList">
+        <bean class="CustomPropertyEditorRegistrar" />
+    </util:list>
+
+    <bean id="customEditorConfigurer" class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="propertyEditorRegistrars" ref="propertyEditorRegistrarsList" />
+        <property name="customEditors">
+            <map>
+                <entry key="custom.FullName" value="custom.FullNamePropertyEditor" />
+            </map>
+        </property>
+    </bean>
+
+    <util:list id="stringList">
+        <value>String member 1</value>
+        <value>String member 2</value>
+    </util:list>
+
+    <bean id="builtInExample" class="PropertyEditorBean">
+        <property name="bytes" value="John Mayer" />
+        <property name="character" value="A" />
+        <property name="cls" value="java.lang.String" />
+        <property name="trueOrFalse" value="true" />
+        <property name="stringList" ref="stringList" />
+        <property name="date" value="05/03/13" />
+        <property name="floatVal" value="123.45678" />
+        <property name="file" value="app-context.xml" />
+        <property name="inputStream" value="app-context.xml"/>
+        <property name="locale" value="en_US" />
+        <property name="pattern" value="a*b" />
+        <property name="properties" value="name=Chris age=32" />
+        <property name="trimString" value="   String need trimming   " />
+        <property name="url" value="http://spring.io" />
+    </bean>
+
+    <bean id="customEditorExample" class="custom.CustomEditorExample">
+        <property name="name" value="John Mayer" />
+    </bean>
+</beans>
