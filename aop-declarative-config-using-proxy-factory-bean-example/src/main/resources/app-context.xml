@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="grammyGuitarist" class="GrammyGuitarist" />
+
+    <bean id="auditAdvice" class="AuditAdvice" />
+
+    <util:list id="interceptorAdviceNames" >
+        <value>auditAdvice</value>
+    </util:list>
+
+    <bean id="proxyOne" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="grammyGuitarist" />
+        <property name="interceptorNames" ref="interceptorAdviceNames" />
+    </bean>
+
+    <bean id="documentaristOne" class="Documentarist">
+        <property name="grammyGuitarist" ref="proxyOne" />
+    </bean>
+
+    <bean id="advisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+        <property name="advice" ref="auditAdvice" />
+        <property name="pointcut">
+            <bean class="org.springframework.aop.aspectj.AspectJExpressionPointcut">
+                <property name="expression" value="execution(* sing*(..))" />
+            </bean>
+        </property>
+    </bean>
+
+    <util:list id="interceptorAdvisorNames">
+        <value>advisor</value>
+    </util:list>
+
+    <bean id="proxyTwo" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="grammyGuitarist" />
+        <property name="interceptorNames" ref="interceptorAdvisorNames" />
+    </bean>
+
+    <bean id="documentaristTwo" class="Documentarist">
+        <property name="grammyGuitarist" ref="proxyTwo" />
+    </bean>
+
+</beans>
