@@ -71,6 +71,20 @@ public class SpringJdbcDataSourceExampleTest {
 		ctx.close();
 	}
 
+	@Test
+	public void testFive() throws SQLException {
+		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
+		ctx.load("datasource-hikari.xml");
+		ctx.refresh();
+
+		DataSource dataSource = ctx.getBean("dataSource", DataSource.class);
+		assertNotNull(dataSource);
+
+		testDataSource(dataSource);
+
+		ctx.close();
+	}
+
 	private void testDataSource(DataSource dataSource) throws SQLException {
 		Connection connection = null;
 		try {
