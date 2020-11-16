@@ -85,6 +85,32 @@ public class SpringJdbcDataSourceExampleTest {
 		ctx.close();
 	}
 
+	@Test
+	public void testSix() throws SQLException {
+		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
+		ctx.load("datasource-embedded.xml");
+		ctx.refresh();
+
+		DataSource dataSource = ctx.getBean("dataSource", DataSource.class);
+		assertNotNull(dataSource);
+
+		testDataSource(dataSource);
+
+		ctx.close();
+	}
+
+	@Test
+	public void testSeven() throws SQLException {
+		GenericApplicationContext ctx = new AnnotationConfigApplicationContext(EmbeddedDbConfig.class);
+
+		DataSource dataSource = ctx.getBean("dataSource", DataSource.class);
+		assertNotNull(dataSource);
+
+		testDataSource(dataSource);
+
+		ctx.close();
+	}
+
 	private void testDataSource(DataSource dataSource) throws SQLException {
 		Connection connection = null;
 		try {
