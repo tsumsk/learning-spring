@@ -3,7 +3,10 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.GenericApplicationContext;
 import spring.jdbc.template.example.Config;
 import spring.jdbc.template.example.ConfigV2;
+import spring.jdbc.template.example.Singer;
 import spring.jdbc.template.example.SingerDao;
+
+import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -26,6 +29,16 @@ public class SpringJdbcTemplateExampleTest {
 		assertNotNull(singerDao);
 		String singerName = singerDao.findNameByIdV2(1l);
 		assertTrue("John Mayer".equals(singerName));
+		ctx.close();
+	}
+
+	@Test
+	public void testFindAll() {
+		GenericApplicationContext ctx = new AnnotationConfigApplicationContext(ConfigV2.class);
+		SingerDao singerDao = ctx.getBean("jdbcSingerDao", SingerDao.class);
+		assertNotNull(singerDao);
+		List<Singer> singers = singerDao.findAll();
+		singers.forEach(System.out::println);
 		ctx.close();
 	}
 }
