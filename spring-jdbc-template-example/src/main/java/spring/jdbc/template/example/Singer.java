@@ -19,4 +19,11 @@ public class Singer implements Serializable {
 
 	private List<Album> albums;
 
+	public void addAlbum(Album album) {
+		if (albums == null) {
+			return;
+		}
+
+		albums.add(album);
+	}
 }

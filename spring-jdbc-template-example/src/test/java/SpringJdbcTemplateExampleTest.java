@@ -41,4 +41,14 @@ public class SpringJdbcTemplateExampleTest {
 		singers.forEach(System.out::println);
 		ctx.close();
 	}
+
+	@Test
+	public void testFindAllWithAlbums() {
+		GenericApplicationContext ctx = new AnnotationConfigApplicationContext(ConfigV2.class);
+		SingerDao singerDao = ctx.getBean("jdbcSingerDao", SingerDao.class);
+		assertNotNull(singerDao);
+		List<Singer> singers = singerDao.findAllWithAlbums();
+		singers.forEach(System.out::println);
+		ctx.close();
+	}
 }
