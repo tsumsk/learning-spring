@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import javax.sql.DataSource;
 
 @Configuration
 @PropertySource("jdbc-hikari.properties")
-public class Config {
+public class ConfigV2 {
 	@Value("${jdbcUrl}")
 	private String jdbcUrl;
 
@@ -42,17 +42,16 @@ public class Config {
 	}
 
 	@Bean
-	public JdbcTemplate jdbcTemplate() {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		jdbcTemplate.setDataSource(dataSource());
+	public NamedParameterJdbcTemplate namedParameterJdbcTemplate() {
+		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource());
 
-		return jdbcTemplate;
+		return namedParameterJdbcTemplate;
 	}
 
 	@Bean
 	public SingerDao jdbcSingerDao() {
 		JdbcSingerDao jdbcSingerDao = new JdbcSingerDao();
-		jdbcSingerDao.setJdbcTemplate(jdbcTemplate());
+		jdbcSingerDao.setNamedParameterJdbcTemplate(namedParameterJdbcTemplate());
 
 		return jdbcSingerDao;
 	}
