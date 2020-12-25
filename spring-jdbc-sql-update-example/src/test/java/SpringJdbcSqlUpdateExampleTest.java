@@ -12,6 +12,23 @@ import static org.junit.Assert.assertNotNull;
 
 public class SpringJdbcSqlUpdateExampleTest {
 	@Test
+	public void testInsert() {
+		GenericApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
+		SingerDao singerDao = ctx.getBean("jdbcSingerDao", SingerDao.class);
+		assertNotNull(singerDao);
+
+		Singer singer = new Singer();
+		singer.setFirstName("Xu");
+		singer.setLastName("Liu");
+		singer.setBirthDate(new Date(
+			(new GregorianCalendar(1989, 9, 29)).getTime().getTime()));
+
+		singerDao.insert(singer);
+
+		ctx.close();
+	}
+
+	@Test
 	public void testUpdate() {
 		GenericApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
 		SingerDao singerDao = ctx.getBean("jdbcSingerDao", SingerDao.class);
