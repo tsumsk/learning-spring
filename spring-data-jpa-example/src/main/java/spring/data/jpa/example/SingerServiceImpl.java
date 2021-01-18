@@ -3,6 +3,7 @@ package spring.data.jpa.example;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import spring.data.jpa.example.entities.Singer;
 
@@ -31,5 +32,16 @@ public class SingerServiceImpl implements SingerService {
 	@Override
 	public List<Singer> findByFirstNameAndLastName(String firstName, String lastName) {
 		return singerRepository.findByFirstNameAndLastName(firstName, lastName);
+	}
+
+	@Override
+	public Singer save(Singer singer) {
+		return singerRepository.save(singer);
+	}
+
+	@Transactional(propagation = Propagation.NEVER)
+	@Override
+	public long countAll() {
+		return singerRepository.countAllSingers();
 	}
 }

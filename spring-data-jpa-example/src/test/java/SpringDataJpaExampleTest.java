@@ -57,4 +57,14 @@ public class SpringDataJpaExampleTest {
 			logger.info(album.toString());
 		}
 	}
+
+	@Test
+	public void testSave() {
+		GenericApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+		SingerService singerService = ctx.getBean("jpaSingerService", SingerService.class);
+		Singer singer = singerService.findByFirstName("xu").get(0);
+		singer.setFirstName("qianxin");
+		singerService.save(singer);
+		ctx.close();
+	}
 }
