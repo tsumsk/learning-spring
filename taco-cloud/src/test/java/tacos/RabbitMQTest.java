@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import tacos.jpa.data.Order;
-import tacos.message.rabbitmq.RabbitmqOrderMessagingService;
+import tacos.message.rabbitmq.RabbitmqOrderSender;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = TacoCloudApplication.class)
 public class RabbitMQTest {
 
     @Autowired
-    private RabbitmqOrderMessagingService rabbitmqOrderMessagingService;
+    private RabbitmqOrderSender rabbitmqOrderMessagingService;
 
     @Test
     public void testSendMessage() {

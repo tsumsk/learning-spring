@@ -1,11 +1,6 @@
 package tacos.jdbc.repository;
 
-import java.sql.Timestamp;
-import java.sql.Types;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
@@ -15,10 +10,17 @@ import org.springframework.stereotype.Repository;
 import tacos.jdbc.data.Ingredient;
 import tacos.jdbc.data.Taco;
 
+import java.sql.Timestamp;
+import java.sql.Types;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
 @Repository
 public class JdbcTacoRepository implements TacoRepository {
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
     public JdbcTacoRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -39,7 +41,6 @@ public class JdbcTacoRepository implements TacoRepository {
         PreparedStatementCreatorFactory factory = new PreparedStatementCreatorFactory(
             "insert into Taco (name, created_at) values (?, ?)", Types.VARCHAR, Types.TIMESTAMP);
 
-        // to fix java.sql.SQLException: Generated keys not requested
         factory.setReturnGeneratedKeys(true);
 
         PreparedStatementCreator psc = factory.newPreparedStatementCreator(

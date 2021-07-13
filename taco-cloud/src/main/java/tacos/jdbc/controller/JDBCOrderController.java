@@ -1,7 +1,5 @@
 package tacos.jdbc.controller;
 
-import javax.validation.Valid;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +12,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import tacos.jdbc.data.Order;
 import tacos.jdbc.repository.OrderRepository;
+
+import javax.validation.Valid;
 
 @Slf4j
 @Controller
@@ -30,7 +30,6 @@ public class JDBCOrderController {
 
     @GetMapping("/current")
     public String orderForm(Model model) {
-        // model.addAttribute("order", new Order());
         return "jdbcOrderForm";
     }
 

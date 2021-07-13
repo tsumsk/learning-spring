@@ -1,28 +1,20 @@
 package tacos.security.data;
 
-import java.util.Arrays;
-import java.util.Collection;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.util.Arrays;
+import java.util.Collection;
+
 @Data
 @Entity
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
-@RequiredArgsConstructor
 @Table(name = "Taco_User")
+@RequiredArgsConstructor
 public class User implements UserDetails {
 
     @Id
@@ -46,6 +38,16 @@ public class User implements UserDetails {
     private final String zip;
 
     private final String phone;
+
+    private User() {
+        this.username = null;
+        this.password = null;
+        this.street = null;
+        this.city = null;
+        this.state = null;
+        this.zip = null;
+        this.phone = null;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

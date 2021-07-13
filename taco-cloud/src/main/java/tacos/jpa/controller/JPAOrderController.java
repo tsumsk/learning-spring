@@ -1,13 +1,13 @@
 package tacos.jpa.controller;
 
-import javax.validation.Valid;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -19,9 +19,11 @@ import org.springframework.web.bind.support.SessionStatus;
 import tacos.config.TacoOrderConfig;
 import tacos.jpa.data.Order;
 import tacos.jpa.repository.OrderRepository;
-import tacos.message.OrderMessagingService;
+import tacos.message.OrderSender;
 import tacos.security.data.User;
 import tacos.security.repository.UserRepository;
+
+import javax.validation.Valid;
 
 @Slf4j
 @Controller
@@ -39,15 +41,15 @@ public class JPAOrderController {
 
     @Autowired
     @Qualifier("jmsOrderMessagingService")
-    private OrderMessagingService jmsOrderMessagingService;
+    private OrderSender jmsOrderSender;
 
     @Autowired
     @Qualifier("rabbitmqOrderMessagingService")
-    private OrderMessagingService rabbitmqOrderMessagingService;
+    private OrderSender rabbitmqOrderSender;
 
     @Autowired
     @Qualifier("kafkaOrderMessagingService")
-    private OrderMessagingService kafkaOrderMessagingService;
+    private OrderSender kafkaOrderSender;
 
     @Autowired
     public JPAOrderController(OrderRepository orderRepository) {
@@ -56,53 +58,9 @@ public class JPAOrderController {
 
     @GetMapping("/current")
     public String orderForm(Model model) {
-        // model.addAttribute("order", new Order());
         return "jpaOrderForm";
     }
 
-    /*
-    @PostMapping
-    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus, Principal principal) {
-        if (errors.hasErrors()) {
-            return "jpaOrderForm";
-        }
-
-        log.info("Order submitted: " + order);
-
-        order.setUser(userRepository.findByUsername(principal.getName()));
-
-        orderRepository.save(order);
-
-        // close session
-        sessionStatus.setComplete();
-
-        return "redirect:/";
-    }
-     */
-
-    /*
-    @PostMapping
-    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus,
-        Authentication authentication) {
-
-        if (errors.hasErrors()) {
-            return "jpaOrderForm";
-        }
-
-        log.info("Order submitted: " + order);
-
-        order.setUser((User)authentication.getPrincipal());
-
-        orderRepository.save(order);
-
-        // close session
-        sessionStatus.setComplete();
-
-        return "redirect:/";
-    }
-     */
-
-    /*
     @PostMapping
     public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus) {
 
@@ -117,30 +75,9 @@ public class JPAOrderController {
 
         orderRepository.save(order);
 
-        // close session
-        sessionStatus.setComplete();
-
-        return "redirect:/";
-    }
-     */
-
-    @PostMapping
-    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus,
-        @AuthenticationPrincipal User user) {
-
-        if (errors.hasErrors()) {
-            return "jpaOrderForm";
-        }
-
-        log.info("Order submitted: " + order);
-
-        order.setUser(user);
-
-        orderRepository.save(order);
-
         // jmsOrderMessagingService.sendOrder(order);
 
-        rabbitmqOrderMessagingService.sendOrder(order);
+        rabbitmqOrderSender.sendOrder(order);
 
         // kafkaOrderMessagingService.sendOrder(order);
 

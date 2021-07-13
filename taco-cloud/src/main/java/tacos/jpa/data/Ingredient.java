@@ -1,9 +1,6 @@
 package tacos.jpa.data;
 
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,8 +9,6 @@ import javax.persistence.Id;
 
 @Data
 @Entity
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
-@RequiredArgsConstructor
 public class Ingredient {
     @Id
     private final String id;
@@ -23,7 +18,13 @@ public class Ingredient {
     @Enumerated(EnumType.STRING)
     private final Type type;
 
-    public static enum Type {
+    public enum Type {
         WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
+    }
+
+    private Ingredient() {
+        this.id = null;
+        this.name = null;
+        this.type = null;
     }
 }

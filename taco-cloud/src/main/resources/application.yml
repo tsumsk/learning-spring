@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: @spring.profiles.active@
   kafka:
     consumer:
       group-id: test
@@ -18,10 +20,10 @@ spring:
     schema:
       - classpath:schema.sql
     data:
-#      - classpath:data.sql
+      - classpath:data.sql
 
 hibernate:
-  physical_naming_strategy: tacos.jpa.data.SnakeCasePhysicalNamingStrategy
+  physical_naming_strategy: tacos.jpa.config.SnakeCasePhysicalNamingStrategy
 
 server:
   port: 8443
