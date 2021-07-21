@@ -16,4 +16,4 @@ spring:
     show-sql: true
 
 greeting:
-  message: Hello World
+  message: Refresh Config Test
