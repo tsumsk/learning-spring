@@ -22,4 +22,4 @@ management:
         include: "*"
 
 greeting:
-  message: Hello World
+  message: Refresh Config Test
