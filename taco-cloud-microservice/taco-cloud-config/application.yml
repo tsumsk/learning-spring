@@ -15,5 +15,11 @@ spring:
   jpa:
     show-sql: true
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
 greeting:
   message: Hello World

@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class RefreshConfigTestController {
 	private String message;
 
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	@GetMapping("/hello")
 	public String message() {
 		return message;
