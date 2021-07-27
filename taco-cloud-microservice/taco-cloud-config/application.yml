@@ -22,4 +22,4 @@ management:
         include: "*"
 
 greeting:
-  message: Refresh Config Test
+  message: Refresh Config Test 2
